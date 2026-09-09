@@ -5,13 +5,13 @@
 }
 
 :root {
-  --ink: #1c1917;
-  --paper: #faf6f0;
-  --accent: #d95d39;
-  --accent-dark: #a8442a;
-  --line: #e3d9c9;
-  --text-muted: #6b6459;
-  --radius: 4px;
+  --ink: #172033;
+  --paper: #f7f8fc;
+  --accent: #4f6fdc;
+  --accent-dark: #3b56b5;
+  --line: #d9deea;
+  --text-muted: #667085;
+  --radius: 8px;
 }
 
 body {
@@ -22,6 +22,8 @@ body {
 }
 
 h1,
+h2,
+h3,
 .brand {
   font-family:
     "Space Grotesk",
@@ -180,6 +182,48 @@ h1,
   border-top: 1px solid var(--line);
 }
 
+.experience {
+  padding: 64px 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.experience-card {
+  border: 1px solid var(--line);
+  padding: 24px;
+  margin-bottom: 20px;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.experience-card:hover {
+  background-color: #eef2ff;
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.experience-card h3 {
+  margin-top: 8px;
+}
+
+.experience-meta {
+  color: var(--accent);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.experience-description {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.experience h2 {
+  font-size: 36px;
+  margin-bottom: 24px;
+}
+
 @media (max-width: 600px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -195,5 +239,9 @@ h1,
 
   .social-links {
     justify-content: flex-start;
+  }
+
+  .experience {
+    padding: 64px 16px;
   }
 }
