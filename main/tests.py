@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from main.models import Experience
+from main.models import Experience, Achievement
 
 
 class MainTest(TestCase):
@@ -56,3 +56,52 @@ class MainTest(TestCase):
         self.assertFalse(self.experience.is_ongoing)
         self.assertContains(response, "Selesai")
         self.assertNotContains(response, "Sedang berlangsung")
+
+    def test_achievement_model(self):
+        achievement = Achievement.objects.create(
+            name="BIZIONARY Business Case Competition 2026",
+            organizer="HIMABI Universitas Padjadjaran",
+            award="Finalist",
+            year=2026,
+            description="Test achievement",
+            field="Business Case",
+            level="national",
+        )
+
+        self.assertEqual(
+            achievement.name,
+            "BIZIONARY Business Case Competition 2026"
+        )
+        self.assertEqual(achievement.level, "national")
+
+    def test_achievement_page(self):
+        achievement = Achievement.objects.create(
+            name="BIZIONARY Business Case Competition 2026",
+            organizer="HIMABI Universitas Padjadjaran",
+            award="Finalist",
+            year=2026,
+            description="Test achievement",
+            field="Business Case",
+            level="national",
+        )
+
+        response = self.client.get(
+            reverse("main:show_achievement")
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "achievement.html")
+        self.assertContains(response, achievement.name)
+
+    def test_empty_achievement_page(self):
+        Achievement.objects.all().delete()
+
+        response = self.client.get(
+            reverse("main:show_achievement")
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(
+            response,
+            "Belum ada achievement yang ditambahkan."
+        )
