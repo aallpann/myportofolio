@@ -24,3 +24,23 @@ class Experience(models.Model):
     @property
     def is_ongoing(self):
         return self.ended_at is None
+
+
+class Achievement(models.Model):
+    LEVEL_CHOICES = [
+        ('school', 'Sekolah'),
+        ('village', 'Desa'),
+        ('district', 'Kecamatan'),
+        ('city', 'Kota/Kabupaten'),
+        ('province', 'Provinsi'),
+        ('national', 'Nasional'),
+        ('international', 'Internasional'),
+    ]
+
+    name = models.CharField(max_length=200)
+    organizer = models.CharField(max_length=200)
+    award = models.CharField(max_length=100)
+    year = models.IntegerField()
+    description = models.TextField()
+    field = models.CharField(max_length=200)
+    level = models.CharField(max_length=100)
