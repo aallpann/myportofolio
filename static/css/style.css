@@ -299,3 +299,57 @@ h3,
     font-size: 0.85rem;
     font-weight: 600;
 }
+
+.what-i-do {
+  padding: 64px 0;
+  border-top: 1px solid var(--line);
+}
+
+.what-i-do h2 {
+  font-size: 36px;
+  margin: 8px 0 24px;
+}
+
+.what-i-do-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.what-i-do-card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: white;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.what-i-do-card:hover {
+  background-color: #eef2ff;
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.what-i-do-number {
+  display: block;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.what-i-do-card h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.what-i-do-card p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .what-i-do-grid {
+    grid-template-columns: 1fr;
+  }
+}
