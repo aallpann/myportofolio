@@ -37,6 +37,20 @@
                                 {{ experience.get_category_display }}
                             </span>
                             <h2>{{ experience.title }}</h2>
+                            <p class="experience-organization">
+                                {{ experience.organization }}
+                            </p>
+
+                            <p class="experience-date">
+                                {{ experience.started_at|date:"F Y" }}
+                                —
+                                {% if experience.ended_at %}
+                                    {{ experience.ended_at|date:"F Y" }}
+                                {% else %}
+                                    Present
+                                {% endif %}
+                            </p>
+
                             <p class="experience-description">
                                 {{ experience.description }}
                             </p>
