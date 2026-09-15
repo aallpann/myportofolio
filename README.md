@@ -1,27 +1,5 @@
-Nama : Alfan Kurnia Karim
+### ALFAN KURNIA KARIM
 
-NPM : 2506537814
-
-Kelas : PBP F
-
-### TUGAS 1
-
-1. Pada proyek portofolio ini saya menggunakan beberapa semantic HTML, baik yang sudah ada dari template ataupun yang saya tambahkan sendiri, seperti `<header>`, `<main>`, `<section>`, `<article>`, dan `<footer>`. Saya menggunakan `<header>` untuk bagian navigasi website, `<main>` untuk isi utama halaman, `<section>` untuk membagi bagian Profile dan Experience, `<article>` untuk setiap pengalaman yang ditampilkan, dan `<footer>` untuk bagian informasi di bawah halaman. Penggunaan semantic HTML membuat struktur halaman menjadi lebih jelas dan mudah dipahami karena setiap elemen memiliki fungsi yang sesuai dengan kontennya.
-2. Salah satu tantangan dalam membuat website ini adalah memastikan tampilannya tetap nyaman digunakan pada ukuran layar yang berbeda. Pada tampilan desktop, bagian profile dibuat menggunakan CSS Grid sehingga informasi dan foto dapat ditampilkan berdampingan. Kemudian, saya menggunakan `@media` query untuk mengubah layout menjadi satu kolom ketika lebar layar kurang dari atau sama dengan 600px. Dengan cara tersebut, foto, informasi profile, dan bagian experience dapat ditampilkan dengan lebih baik pada perangkat dengan layar yang lebih kecil, walaupun menurut saya masih perlu untuk diperbagus lagi, jadi saya akan belajar lebih giat.
-3. Website yang dibuat pada tahap ini masih bersifat statis. Informasi seperti profile dan experience masih ditulis secara langsung pada HTML sehingga belum dapat diperbarui secara dinamis melalui database. Untuk pengembangan selanjutnya, saya ingin membuat website yang lebih dinamis dengan menggunakan backend dan database. Dengan begitu, data seperti experience, projects, atau informasi profile dapat dikelola tanpa harus mengubah HTML secara langsung.
-
-### AI DISCLOSURE ###
-Pada pengerjaan tugas kali ini, saya terlambat untuk meng-submit tugas dikarenakan manajemen waktu saya yang kurang baik dan saya juga menggunakan AI seperti ChatGPT, untuk membantu saya dalam memahami tiap konsep, syntax, dan kode yang digunakan pada mata kuliah kali ini.
-
-### TUGAS 2
-
-1. Ketika user mengakses suatu URL, browser mengirimkan HTTP request ke server Django. Request tersebut pertama kali diproses oleh URL routing pada Django untuk menentukan View yang sesuai dengan URL yang diminta. Pada halaman Achievements, URL `/achievement/` diarahkan ke fungsi `show_achievement` pada `views.py`. View tersebut kemudian mengambil data achievement dari database menggunakan model `Achievement` dengan `Achievement.objects.all()`. Data yang diperoleh kemudian dimasukkan ke dalam sebuah context dan dikirimkan ke template `achievement.html`. Template memproses data tersebut menggunakan Django Template Language, salah satunya dengan melakukan perulangan `{% for achievement in achievement_list %}` untuk membuat setiap achievement menjadi sebuah card. Setelah template selesai dirender menjadi HTML, Django mengembalikan HTML tersebut sebagai HTTP response kepada browser. Browser kemudian menampilkan HTML tersebut kepada user.
-2. Data sebaiknya disimpan dalam Model/database karena data portfolio seperti achievements dapat berubah, bertambah, atau diperbarui tanpa harus mengubah struktur HTML pada template. Jika data ditulis langsung di Template, setiap kali ingin menambahkan atau mengubah achievement, kode HTML harus diedit secara manual. Hal tersebut kurang efisien dan dapat menyebabkan template menjadi sulit dikelola. Dengan menggunakan Model dan database, Template hanya bertanggung jawab untuk mengatur bagaimana data ditampilkan. View mengambil data dari database dan mengirimkannya ke Template melalui context. Dengan demikian, pemisahan tanggung jawab antara data dan tampilan menjadi lebih jelas. Pada implementasi ini, data achievement disimpan dalam model `Achievement`, kemudian View mengambil seluruh data menggunakan `Achievement.objects.all()`. Template kemudian melakukan loop terhadap data tersebut sehingga jumlah card yang ditampilkan dapat mengikuti jumlah data yang ada di database. Pendekatan ini juga membuat website lebih mudah dikembangkan. Misalnya, jika nantinya saya ingin menambahkan achievement baru, saya cukup menambahkan data ke database tanpa perlu membuat card HTML baru secara manual.
-3. `makemigrations` digunakan untuk membuat file migration berdasarkan perubahan yang dilakukan pada Model Django. File migration tersebut berisi instruksi atau rencana perubahan struktur database. Sedangkan `migrate` digunakan untuk menjalankan migration tersebut sehingga perubahan benar-benar diterapkan pada database. Dalam pengerjaan Assignment 2, setelah membuat model `Achievement` dan melakukan perubahan pada field `level`, saya menjalankan:
-   python manage.py makemigrations
-Perintah tersebut membuat file migration yang mencatat perubahan pada Model. Kemudian saya menjalankan:
-    python manage.py migrate
-Perintah tersebut menerapkan perubahan dari migration ke database sehingga tabel dan struktur yang dibutuhkan oleh model dapat digunakan.
-
-### AI DISCLOSURE ###
-Pada pengerjaan kali ini saya menggunakan AI berupa ChatGPT untuk membantu saya dalam memahami konsep MVT sekaligus membangun pemahaman saya terkait MVT ini. Pada pengerjaan portofolio kali ini, saya membuat fitur Achievement dan strategi penggunaan AI yang saya lakukan bukan hanya meminta kode secara langsung, tetapi meminta penjelasan mengenai alasan setiap bagian kode digunakan dan bagaimana kode tersebut bekerja. Setelah mendapatkan bantuan, saya menyesuaikan implementasi dengan struktur project dan kebutuhan portofolio saya, memasukkan data achievement saya sendiri, memperbaiki konfigurasi `choices` pada field `level`, menjalankan migration, melakukan pengujian, dan mengecek hasilnya melalui browser. AI juga membantu dalam proses debugging ketika terdapat masalah pada implementasi, tetapi hasil dari AI tetap saya verifikasi dengan menjalankan project, melakukan testing, dan memeriksa hasil halaman secara langsung.
+Halo, semuanya! Branch ini aku gunakan untuk melakukan 
+semacam beberapa perubahan dan eksperimen untuk tugas 
+_website_ portofolio aku ini. _Wish Me luck ya!_^^
