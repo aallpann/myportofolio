@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "DM Sans", sans-serif;
   color: var(--ink);
   background-color: var(--paper);
   line-height: 1.6;
@@ -25,10 +25,13 @@ h1,
 h2,
 h3,
 .brand {
-  font-family:
-    "Space Grotesk",
-    -apple-system,
-    sans-serif;
+  font-family: "Syne", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.03em;
 }
 
 .container {
@@ -49,10 +52,11 @@ h3,
 }
 
 .brand {
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   color: var(--ink);
   text-decoration: none;
+  letter-spacing: -0.04em;
 }
 
 .site-header nav {
@@ -63,7 +67,9 @@ h3,
 .site-header nav a {
   color: var(--ink);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .hero {
@@ -189,12 +195,10 @@ h3,
 }
 
 .experience-card {
-  border: 1px solid var(--line);
   padding: 24px;
-  margin-bottom: 20px;
-  background: white;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
