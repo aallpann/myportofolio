@@ -1,80 +1,60 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Achievements - Alfan</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/static/css/style.css" />
-  </head>
-
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <a href="{% url 'main:show_main' %}" class="brand">Alfan</a>
-
-        <nav>
-          <a href="{% url 'main:show_main' %}">Profile</a>
-          <a href="{% url 'main:show_experience' %}">Experience</a>
-          <a href="{% url 'main:show_achievement' %}">Achievements</a>
-        </nav>
-      </div>
-    </header>
-
+{% extends "base.html" %}
+{% block meta %}
+    <title>Achievements - {{ name }}</title>
+{% endblock meta %}
+{% block content %}
     <main>
-      <section class="experience-section" id="achievements">
-        <div class="container">
-          <p class="section-kicker">Pencapaian saya sejauh ini</p>
-          <h1>Achievements</h1>
-
-          <div class="experience-grid">
-            {% for achievement in achievement_list %}
-              <article class="experience-card">
-                <span class="experience-category">
-                  {{ achievement.get_level_display }}
-                </span>
-
-                <h2>{{ achievement.name }}</h2>
-
-                <p class="experience-meta">
-                  {{ achievement.award }} · {{ achievement.year }}
-                </p>
-
-                <p class="experience-description">
-                  {{ achievement.description }}
-                </p>
-
-                <p>
-                  <strong>Penyelenggara:</strong>
-                  {{ achievement.organizer }}
-                </p>
-
-                <p>
-                  <strong>Bidang:</strong>
-                  {{ achievement.field }}
-                </p>
-              </article>
-
-            {% empty %}
-              <p class="empty-state">
-                Belum ada achievement yang ditambahkan.
-              </p>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
+        <section class="experience-section" id="experience">
+            <div class="container">
+                <p class="section-kicker">Pencapaian yang saya raih</p>
+                <div class="achievement-header">
+                    <h1>Achievements</h1>
+                    <a href="{% url 'main:create_achievement' %}"
+                       class="button achievement-add-button">
+                        <span aria-hidden="true">+</span>
+                        Tambah Achievement
+                    </a>
+                </div>
+                <form method="get"
+                      action="{% url 'main:show_achievement' %}"
+                      class="achievement-search">
+                    <input type="search"
+                           name="title"
+                           value="{{ title_query }}"
+                           placeholder="Cari berdasarkan nama pencapaian"
+                           class="achievement-search__input"
+                           aria-label="Cari berdasarkan nama pencapaian">
+                    <button type="submit" class="button">Cari</button>
+                </form>
+                <div class="experience-grid project-grid">
+                    {% for achievement in achievement_list %}
+                        <article class="experience-card">
+                            {% if achievement.achievement_image_url %}
+                                <img src="{{ achievement.achievement_image_url }}"
+                                     alt="Gambar {{ achievement.title }}"
+                                     class="achievement-image">
+                            {% endif %}
+                            <h2>{{ achievement.title }}</h2>
+                            <span class="experience-category">{{ achievement.tech_stack }}</span>
+                            <p class="experience-description">{{ achievement.description }}</p>
+                            <div class="achievement-card-actions">
+                                <div class="project-actions">
+                                    {% if achievement.achievement_url %}
+                                        <a href="{{ achievement.achievement_url }}" class="button">Lihat Pencapaian</a>
+                                    {% endif %}
+                                    {% include "components/achievement_delete_modal.html" with achievement=achievement %}
+                                </div>
+                            </div>
+                        </article>
+                    {% empty %}
+                        {% if title_query %}
+                            <p class="empty-state">Tidak ada pencapaian dengan nama tersebut.</p>
+                        {% else %}
+                            <p class="empty-state">Belum ada pencapaian yang ditambahkan.</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
     </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; 2026 Alfan. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
-      </div>
-    </footer>
-  </body>
-</html>
+{% endblock content %}
