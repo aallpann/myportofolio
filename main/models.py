@@ -30,6 +30,7 @@ class Experience(models.Model):
 class Achievement(models.Model):
     LEVEL_CHOICES = [
         ('school', 'Sekolah'),
+        ('university', 'Universitas'),
         ('village', 'Desa'),
         ('district', 'Kecamatan'),
         ('city', 'Kota/Kabupaten'),
@@ -45,3 +46,15 @@ class Achievement(models.Model):
     description = models.TextField()
     field = models.CharField(max_length=200)
     level = models.CharField(max_length=100, choices=LEVEL_CHOICES)
+
+
+class AchievementImage(models.Model):
+    achievement = models.ForeignKey(
+        Achievement,
+        on_delete=models.CASCADE,
+        related_name="images"
+    )
+    image_url = models.URLField()
+
+    def __str__(self):
+        return f"Image for {self.achievement.name}"

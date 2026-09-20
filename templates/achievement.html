@@ -26,23 +26,85 @@
                            aria-label="Cari berdasarkan nama pencapaian">
                     <button type="submit" class="button">Cari</button>
                 </form>
-                <div class="experience-grid project-grid">
+                <div class="experience-grid achievement-grid">
                     {% for achievement in achievement_list %}
                         <article class="experience-card">
-                            {% if achievement.achievement_image_url %}
-                                <img src="{{ achievement.achievement_image_url }}"
-                                     alt="Gambar {{ achievement.title }}"
-                                     class="achievement-image">
+
+                            {% if achievement.images.all %}
+                                <div class="achievement-gallery"
+                                     data-gallery
+                                     aria-label="Galeri foto {{ achievement.name }}">
+                                    {% for image in achievement.images.all %}
+                                        <figure class="achievement-gallery__slide{% if forloop.first %} is-active{% endif %}">
+                                            <img src="{{ image.image_url }}"
+                                                 alt=""
+                                                 aria-hidden="true"
+                                                 class="achievement-gallery__backdrop">
+                                            <img src="{{ image.image_url }}"
+                                                 alt="{{ achievement.name }} — foto {{ forloop.counter }}"
+                                                 class="achievement-gallery__image">
+                                        </figure>
+                                    {% endfor %}
+
+                                    {% if achievement.images.count > 1 %}
+                                        <div class="achievement-gallery__controls">
+                                            <button type="button"
+                                                    class="achievement-gallery__prev"
+                                                    aria-label="Foto sebelumnya">
+                                                &#10094;
+                                            </button>
+
+                                            <div class="achievement-gallery__dots" role="tablist" aria-label="Pilih foto">
+                                                {% for image in achievement.images.all %}
+                                                    <button type="button"
+                                                            class="achievement-gallery__dot{% if forloop.first %} is-active{% endif %}"
+                                                            aria-label="Tampilkan foto {{ forloop.counter }}"
+                                                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"></button>
+                                                {% endfor %}
+                                            </div>
+
+                                            <button type="button"
+                                                    class="achievement-gallery__next"
+                                                    aria-label="Foto berikutnya">
+                                                &#10095;
+                                            </button>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             {% endif %}
-                            <h2>{{ achievement.title }}</h2>
-                            <span class="experience-category">{{ achievement.tech_stack }}</span>
-                            <p class="experience-description">{{ achievement.description }}</p>
+
+                            <span class="experience-category">
+                                {{ achievement.get_level_display }}
+                            </span>
+
+                            <h2>{{ achievement.name }}</h2>
+
+                            <p class="experience-meta">
+                                {{ achievement.award }} · {{ achievement.year }}
+                            </p>
+
+                            <p class="experience-description">
+                                {{ achievement.description }}
+                            </p>
+
+                            <p>
+                                <strong>Penyelenggara:</strong> {{ achievement.organizer }}
+                            </p>
+
+                            <p>
+                                <strong>Bidang:</strong> {{ achievement.field }}
+                            </p>
+
                             <div class="achievement-card-actions">
                                 <div class="project-actions">
-                                    {% if achievement.achievement_url %}
-                                        <a href="{{ achievement.achievement_url }}" class="button">Lihat Pencapaian</a>
-                                    {% endif %}
+
+                                    <a href="{% url 'main:update_achievement' achievement.id %}"
+                                    class="button">
+                                        Edit
+                                    </a>
+
                                     {% include "components/achievement_delete_modal.html" with achievement=achievement %}
+
                                 </div>
                             </div>
                         </article>
@@ -57,4 +119,52 @@
             </div>
         </section>
     </main>
+
+    <script>
+        document.querySelectorAll(".achievement-gallery").forEach((gallery) => {
+            const slides = gallery.querySelectorAll(
+                ".achievement-gallery__slide"
+            );
+            const dots = gallery.querySelectorAll(".achievement-gallery__dot");
+            const prevButton = gallery.querySelector(".achievement-gallery__prev");
+            const nextButton = gallery.querySelector(".achievement-gallery__next");
+
+            let currentIndex = 0;
+
+            function showImage(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle("is-active", i === index);
+                });
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle("is-active", i === index);
+                    dot.setAttribute("aria-selected", i === index);
+                });
+            }
+
+            if (slides.length > 1) {
+                prevButton.addEventListener("click", () => {
+                    currentIndex =
+                        (currentIndex - 1 + slides.length) % slides.length;
+
+                    showImage(currentIndex);
+                });
+
+                nextButton.addEventListener("click", () => {
+                    currentIndex =
+                        (currentIndex + 1) % slides.length;
+
+                    showImage(currentIndex);
+                });
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener("click", () => {
+                        currentIndex = index;
+                        showImage(currentIndex);
+                    });
+                });
+            }
+
+            showImage(currentIndex);
+        });
+    </script>
 {% endblock content %}

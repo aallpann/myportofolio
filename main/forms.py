@@ -1,6 +1,6 @@
-from django.forms import ModelForm, TextInput, Textarea, URLInput
+from django.forms import ModelForm, TextInput, Textarea, URLInput, inlineformset_factory
 
-from main.models import Achievement
+from main.models import Achievement, AchievementImage
 
 class AchievementForm(ModelForm):
     class Meta:
@@ -69,3 +69,24 @@ class AchievementForm(ModelForm):
                 }
             ),
         }
+
+class AchievementImageForm(ModelForm):
+    class Meta:
+        model = AchievementImage
+        fields = ["image_url"]
+
+        widgets = {
+            "image_url": TextInput(
+                attrs={
+                    "placeholder": "URL gambar achievement"
+                }
+            ),
+        }
+
+AchievementImageFormSet = inlineformset_factory(
+    Achievement,
+    AchievementImage,
+    form=AchievementImageForm,
+    extra=3,
+    can_delete=True,
+)

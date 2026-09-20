@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from main.forms import AchievementForm
+from main.forms import AchievementForm, AchievementImageFormSet
 from main.models import Experience, Achievement
 
 from django.contrib import messages
@@ -37,36 +37,47 @@ def show_achievement(request):
         json_response.content.decode("utf-8"),
     )
     achievements = [achievement.object for achievement in achievements]
-    name_query = request.GET.get("name", "").strip()
+    title_query = request.GET.get("title", "").strip()
 
     context = {
         "name": "Alfan",
         "achievement_list": achievements,
-        "name_query": name_query,
+        "title_query": title_query,
     }
     return render(request, "achievement.html", context)
 
 def create_achievement(request):
     form = AchievementForm(request.POST or None)
+    image_formset = AchievementImageFormSet(request.POST or None)
 
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        messages.success(request, "Achievement baru berhasil ditambahkan!")
-        return redirect("main:show_achievement")
+    if request.method == "POST":
+        if form.is_valid() and image_formset.is_valid():
+            achievement = form.save()
+
+            image_formset.instance = achievement
+            image_formset.save()
+
+            messages.success(
+                request,
+                "Achievement baru berhasil ditambahkan!"
+            )
+            return redirect("main:show_achievement")
 
     context = {
         "name": "Alfan",
         "form": form,
+        "image_formset": image_formset,
     }
+
     return render(request, "achievement_form.html", context)
 
 def get_achievements_json(request):
-    name_query = request.GET.get("title", "").strip()
+    title_query = request.GET.get("title", "").strip()
     achievements = Achievement.objects.all()
 
-    if name_query:
+    if title_query:
         achievements = Achievement.objects.filter(
-            name__icontains=name_query
+            name__icontains=title_query
         )
 
     achievements_json = serializers.serialize("json", achievements)
@@ -81,3 +92,43 @@ def delete_achievement(request, achievement_id):
         return redirect("main:show_achievement")
 
     return redirect("main:show_achievement")
+
+def update_achievement(request, achievement_id):
+    achievement = get_object_or_404(
+        Achievement,
+        pk=achievement_id
+    )
+
+    form = AchievementForm(
+        request.POST or None,
+        instance=achievement
+    )
+
+    image_formset = AchievementImageFormSet(
+        request.POST or None,
+        instance=achievement
+    )
+
+    if request.method == "POST":
+        if form.is_valid() and image_formset.is_valid():
+            form.save()
+            image_formset.save()
+
+            messages.success(
+                request,
+                "Achievement berhasil diperbarui!"
+            )
+            return redirect("main:show_achievement")
+
+    context = {
+        "name": "Alfan",
+        "form": form,
+        "image_formset": image_formset,
+        "achievement": achievement,
+    }
+
+    return render(
+        request,
+        "achievement_edit.html",
+        context
+    )

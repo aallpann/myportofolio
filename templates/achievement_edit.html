@@ -1,31 +1,44 @@
 {% extends "base.html" %}
+
 {% block meta %}
-    <title>Add Achievement - {{ name }}</title>
+    <title>Edit Achievement - {{ name }}</title>
 {% endblock meta %}
+
 {% block content %}
     <main>
         <section class="experience-section">
             <div class="container">
-                <h1>Add New Achievement</h1>
+                <h1>Edit Achievement</h1>
+
                 <form method="post"
-                      action="{% url 'main:create_achievement' %}"
+                      action="{% url 'main:update_achievement' achievement.id %}"
                       class="achievement-form">
+
                     {% csrf_token %}
+
                     {% for field in form %}
                         <div class="form-group">
-                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <label for="{{ field.id_for_label }}">
+                                {{ field.label }}
+                            </label>
+
                             {{ field }}
+
                             {% for error in field.errors %}
                                 <p class="form-error">{{ error }}</p>
                             {% endfor %}
                         </div>
                     {% endfor %}
+
                     <h2>Foto Achievement</h2>
 
                     {{ image_formset.management_form }}
 
                     {% for image_form in image_formset %}
                         <div class="form-group">
+
+                            {{ image_form.id }}
+
                             <label for="{{ image_form.image_url.id_for_label }}">
                                 Foto {{ forloop.counter }}
                             </label>
@@ -35,10 +48,18 @@
                             {% for error in image_form.image_url.errors %}
                                 <p class="form-error">{{ error }}</p>
                             {% endfor %}
+
                         </div>
                     {% endfor %}
-                    <button type="submit" class="button">Tambah Achievement</button>
-                    <a href="{% url 'main:show_achievement' %}" class="button button-secondary">Batal</a>
+
+                    <button type="submit" class="button">
+                        Simpan Perubahan
+                    </button>
+
+                    <a href="{% url 'main:show_achievement' %}"
+                       class="button button-secondary">
+                        Batal
+                    </a>
                 </form>
             </div>
         </section>
