@@ -1,5 +1,10 @@
-  {% extends 'base.html' %}
-  {% block content %}
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>{{ name }} - Portfolio</title>
+{% endblock meta %}
+
+{% block content %}
     <main>
       <section class="hero" id="profile">
         <div class="container hero-grid">
