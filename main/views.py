@@ -24,7 +24,7 @@ def show_main(request):
 
 def show_experience(request):
     context = {
-        "name": "Alfan Kurnia Karim",
+        "name": "Alfan",
         "experience_list": Experience.objects.all(),
     }
     return render(request, "experience.html", context)
