@@ -1,4 +1,6 @@
 import uuid
+
+from django.contrib.auth.models import User
 from django.db import models
 
 class Experience(models.Model):
@@ -46,6 +48,7 @@ class Achievement(models.Model):
     description = models.TextField()
     field = models.CharField(max_length=200)
     level = models.CharField(max_length=100, choices=LEVEL_CHOICES)
+    starred_by = models.ManyToManyField(User, related_name="starred_achievements", blank=True)
 
 
 class AchievementImage(models.Model):

@@ -9,11 +9,13 @@
                 <p class="section-kicker">Pencapaian yang saya raih</p>
                 <div class="achievement-header">
                     <h1>Achievements</h1>
+                {% if user.is_superuser %} 
                     <a href="{% url 'main:create_achievement' %}"
                        class="button achievement-add-button">
                         <span aria-hidden="true">+</span>
                         Tambah Achievement
                     </a>
+                {% endif %} 
                 </div>
                 <form method="get"
                       action="{% url 'main:show_achievement' %}"
@@ -95,15 +97,21 @@
                                 <strong>Bidang:</strong> {{ achievement.field }}
                             </p>
 
+                            {% include "components/achievement_star.html" with achievement=achievement %}
+
                             <div class="achievement-card-actions">
                                 <div class="project-actions">
 
-                                    <a href="{% url 'main:update_achievement' achievement.id %}"
-                                    class="button">
-                                        Edit
-                                    </a>
+                                    {% if user.is_superuser %}
+                                        <a href="{% url 'main:update_achievement' achievement.id %}"
+                                        class="button">
+                                            Edit
+                                        </a>
+                                    {% endif %}
 
-                                    {% include "components/achievement_delete_modal.html" with achievement=achievement %}
+                                    {% if user.is_superuser %} 
+                                        {% include "components/achievement_delete_modal.html" with achievement=achievement %}
+                                    {% endif %}
 
                                 </div>
                             </div>

@@ -10,12 +10,12 @@
                 <div class="achievement-header">
                     <h1>Experience</h1>
 
-                    <a
-                        href="{% url 'main:create_experience' %}"
-                        class="button"
-                    >
-                        + Tambah Experience
-                    </a>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'main:create_experience' %}" class="button">
+                            + Tambah Experience
+                        </a>
+                    {% endif %}
+
                 </div>
                 <div class="experience-grid">
                     {% for experience in experience_list %}
@@ -48,15 +48,18 @@
                                 <p class="experience-status">Selesai</p>
                             {% endif %}
                             <div class="project-actions">
-                                <a
-                                    href="{% url 'main:update_experience' experience.id %}"
-                                    class="button"
-                                >
-                                    Edit
-                                </a>
 
-                                {% include "components/experience_delete_modal.html" with experience=experience %}
-                            
+                                {% if user.is_superuser %}
+                                    <a
+                                        href="{% url 'main:update_experience' experience.id %}"
+                                        class="button"
+                                    >
+                                        Edit
+                                    </a>
+
+                                    {% include "components/experience_delete_modal.html" with experience=experience %}
+                                {% endif %}
+
                             </div>
                         </article>
                     {% empty %}
