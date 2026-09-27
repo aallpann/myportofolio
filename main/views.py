@@ -147,3 +147,51 @@ def create_experience(request):
     }
 
     return render(request, "experience_form.html", context)
+
+def update_experience(request, experience_id):
+    experience = get_object_or_404(
+        Experience,
+        pk=experience_id
+    )
+
+    form = ExperienceForm(
+        request.POST or None,
+        instance=experience
+    )
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(
+            request,
+            "Experience berhasil diperbarui!"
+        )
+        return redirect("main:show_experience")
+
+    context = {
+        "name": "Alfan",
+        "form": form,
+        "experience": experience,
+    }
+
+    return render(
+        request,
+        "experience_edit.html",
+        context
+    )
+
+def delete_experience(request, experience_id):
+    experience = get_object_or_404(
+        Experience,
+        pk=experience_id
+    )
+
+    if request.method == "POST":
+        experience.delete()
+        messages.success(
+            request,
+            "Experience berhasil dihapus!"
+        )
+        return redirect("main:show_experience")
+
+    return redirect("main:show_experience")
+
