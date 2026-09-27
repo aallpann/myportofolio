@@ -1,6 +1,6 @@
-from django.forms import ModelForm, TextInput, Textarea, URLInput, inlineformset_factory
+from django.forms import ModelForm, TextInput, Textarea, URLInput, DateInput, Select, inlineformset_factory
 
-from main.models import Achievement, AchievementImage
+from main.models import Achievement, AchievementImage, Experience
 
 class AchievementForm(ModelForm):
     class Meta:
@@ -62,12 +62,7 @@ class AchievementForm(ModelForm):
                     "maxlength": 255,
                 }
             ),
-            "level": TextInput(
-                attrs={
-                    "placeholder": "Tingkat Penghargaan",
-                    "maxlength": 255,
-                }
-            ),
+            "level": Select(),
         }
 
 class AchievementImageForm(ModelForm):
@@ -76,7 +71,7 @@ class AchievementImageForm(ModelForm):
         fields = ["image_url"]
 
         widgets = {
-            "image_url": TextInput(
+            "image_url": URLInput(
                 attrs={
                     "placeholder": "URL gambar achievement"
                 }
@@ -90,3 +85,70 @@ AchievementImageFormSet = inlineformset_factory(
     extra=3,
     can_delete=True,
 )
+
+class ExperienceForm(ModelForm):
+    class Meta:
+        model = Experience
+
+        fields = [
+            "title",
+            "organization",
+            "description",
+            "category",
+            "thumbnail",
+            "started_at",
+            "ended_at",
+        ]
+
+        labels = {
+            "title": "Nama Pengalaman",
+            "organization": "Nama Organisasi",
+            "description": "Deskripsi Pengalaman",
+            "category": "Kategori Pengalaman",
+            "thumbnail": "URL Gambar",
+            "started_at": "Tanggal Mulai",
+            "ended_at": "Tanggal Selesai",
+        }
+
+        widgets = {
+            "title": TextInput(
+                attrs={
+                    "placeholder": "Nama Kegiatan",
+                }
+            ),
+
+            "organization": TextInput(
+                attrs={
+                    "placeholder": "Penyelenggara Kegiatan",
+                }
+            ),
+
+            "description": Textarea(
+                attrs={
+                    "placeholder": "Ceritakan pengalaman kamu",
+                    "rows": 4,
+                }
+            ),
+
+            "category": Select(),
+
+            "thumbnail": URLInput(
+                attrs={
+                    "placeholder": "URL Gambar Pengalaman",
+                }
+            ),
+
+            "started_at": DateInput(
+                attrs={
+                    "type": "date",
+                },
+                format="%Y-%m-%d",
+            ),
+
+            "ended_at": DateInput(
+                attrs={
+                    "type": "date",
+                },
+                format="%Y-%m-%d",
+            ),
+        }

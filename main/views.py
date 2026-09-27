@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from main.forms import AchievementForm, AchievementImageFormSet
+from main.forms import AchievementForm, AchievementImageFormSet, ExperienceForm
 from main.models import Experience, Achievement
 
 from django.contrib import messages
@@ -132,3 +132,18 @@ def update_achievement(request, achievement_id):
         "achievement_edit.html",
         context
     )
+
+def create_experience(request):
+    form = ExperienceForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Experience baru berhasil ditambahkan!")
+        return redirect("main:show_experience")
+
+    context = {
+        "name": "Alfan",
+        "form": form,
+    }
+
+    return render(request, "experience_form.html", context)
