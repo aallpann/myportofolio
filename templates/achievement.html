@@ -102,8 +102,8 @@
                             <div class="achievement-card-actions">
                                 <div class="project-actions">
 
-                                    {% if user.is_superuser %}
-                                        <a href="{% url 'main:update_achievement' achievement.id %}"
+                                    {% if user.is_superuser or is_editor %}
+                                        <a href="{% url 'main:update_achievement' achievement.id %}" 
                                         class="button">
                                             Edit
                                         </a>
@@ -120,7 +120,7 @@
                         {% if title_query %}
                             <p class="empty-state">Tidak ada pencapaian dengan nama tersebut.</p>
                         {% else %}
-                            <p class="empty-state">Belum ada pencapaian yang ditambahkan.</p>
+                            <p class="empty-state">Belum ada achievement yang ditambahkan.</p>
                         {% endif %}
                     {% endfor %}
                 </div>

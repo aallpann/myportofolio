@@ -15,6 +15,12 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied 
 
+def is_editor(user):
+    return (
+        user.is_authenticated
+        and user.groups.filter(name="Editor").exists()
+    )
+
 
 def show_main(request):
     last_login = request.COOKIES.get('last_login', 'Belum ada sesi login / Cookie tidak ditemukan')
@@ -35,7 +41,9 @@ def show_experience(request):
     context = {
         "name": "Alfan",
         "experience_list": Experience.objects.all(),
+        "is_editor": is_editor(request.user),
     }
+
     return render(request, "experience.html", context)
 
 def show_achievement(request):
@@ -52,6 +60,7 @@ def show_achievement(request):
         "name": "Alfan",
         "achievement_list": achievements,
         "title_query": title_query,
+        "is_editor": is_editor(request.user),
     }
     return render(request, "achievement.html", context)
 
@@ -106,7 +115,13 @@ def get_achievements_json(request):
 
 @login_required(login_url="/login/")
 def delete_achievement(request, achievement_id):
-    achievement = get_object_or_404(Achievement, pk=achievement_id)
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    achievement = get_object_or_404(
+        Achievement,
+        pk=achievement_id
+    )
 
     if request.method == "POST":
         achievement.delete()
@@ -117,7 +132,10 @@ def delete_achievement(request, achievement_id):
 
 @login_required(login_url="/login/")
 def update_achievement(request, achievement_id):
-    if not request.user.is_superuser:
+    if not (
+        request.user.is_superuser
+        or is_editor(request.user)
+    ):
         raise PermissionDenied
     
     achievement = get_object_or_404(
@@ -180,7 +198,10 @@ def create_experience(request):
 
 @login_required(login_url="/login/")
 def update_experience(request, experience_id):
-    if not request.user.is_superuser:
+    if not (
+        request.user.is_superuser
+        or is_editor(request.user)
+    ):
         raise PermissionDenied
 
     experience = get_object_or_404(
