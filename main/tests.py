@@ -92,7 +92,21 @@ class MainTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "achievement.html")
-        self.assertContains(response, achievement.name)
+
+        # Data achievement sekarang dimuat melalui AJAX
+        api_response = self.client.get(
+            reverse("main:get_achievements_json")
+        )
+
+        self.assertEqual(api_response.status_code, 200)
+
+        data = api_response.json()
+
+        self.assertEqual(len(data), 1)
+        self.assertEqual(
+            data[0]["fields"]["name"],
+            achievement.name
+        )
 
     def test_empty_achievement_page(self):
         Achievement.objects.all().delete()

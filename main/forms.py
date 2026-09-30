@@ -1,11 +1,36 @@
+from django.core.exceptions import ValidationError
+from django.utils.html import strip_tags
+
 from django.forms import ModelForm, TextInput, Textarea, URLInput, DateInput, Select, inlineformset_factory
 
 from main.models import Achievement, AchievementImage, Experience
 
 class AchievementForm(ModelForm):
+
+    def clean_name(self):
+        name = strip_tags(self.cleaned_data["name"]).strip()
+        if not name:
+            raise ValidationError(
+                "Nama achievement tidak boleh hanya berisi tag HTML."
+            )
+        return name
+
+    def clean_organizer(self):
+        return strip_tags(self.cleaned_data["organizer"]).strip()
+
+    def clean_award(self):
+        return strip_tags(self.cleaned_data["award"]).strip()
+
+    def clean_field(self):
+        return strip_tags(self.cleaned_data["field"]).strip()
+
+    def clean_description(self):
+        return strip_tags(self.cleaned_data["description"]).strip()
+
     class Meta:
         model = Achievement
-        fields =[
+
+        fields = [
             "name",
             "organizer",
             "award",
