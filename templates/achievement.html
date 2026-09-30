@@ -60,51 +60,74 @@
     {% endif %}
 
     <script>
-        document.querySelectorAll(".achievement-gallery").forEach((gallery) => {
-            const slides = gallery.querySelectorAll(
-                ".achievement-gallery__slide"
-            );
-            const dots = gallery.querySelectorAll(".achievement-gallery__dot");
-            const prevButton = gallery.querySelector(".achievement-gallery__prev");
-            const nextButton = gallery.querySelector(".achievement-gallery__next");
+        function initializeAchievementGalleries() {
+            document.querySelectorAll(".achievement-gallery").forEach((gallery) => {
+                const slides = gallery.querySelectorAll(
+                    ".achievement-gallery__slide"
+                );
 
-            let currentIndex = 0;
+                const dots = gallery.querySelectorAll(
+                    ".achievement-gallery__dot"
+                );
 
-            function showImage(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle("is-active", i === index);
-                });
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle("is-active", i === index);
-                    dot.setAttribute("aria-selected", i === index);
-                });
-            }
+                const prevButton = gallery.querySelector(
+                    ".achievement-gallery__prev"
+                );
 
-            if (slides.length > 1) {
-                prevButton.addEventListener("click", () => {
-                    currentIndex =
-                        (currentIndex - 1 + slides.length) % slides.length;
+                const nextButton = gallery.querySelector(
+                    ".achievement-gallery__next"
+                );
 
-                    showImage(currentIndex);
-                });
+                let currentIndex = 0;
 
-                nextButton.addEventListener("click", () => {
-                    currentIndex =
-                        (currentIndex + 1) % slides.length;
+                function showImage(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle(
+                            "is-active",
+                            i === index
+                        );
+                    });
 
-                    showImage(currentIndex);
-                });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle(
+                            "is-active",
+                            i === index
+                        );
 
-                dots.forEach((dot, index) => {
-                    dot.addEventListener("click", () => {
-                        currentIndex = index;
+                        dot.setAttribute(
+                            "aria-selected",
+                            i === index
+                        );
+                    });
+                }
+
+                if (slides.length > 1) {
+                    prevButton.addEventListener("click", () => {
+                        currentIndex =
+                            (currentIndex - 1 + slides.length) %
+                            slides.length;
+
                         showImage(currentIndex);
                     });
-                });
-            }
 
-            showImage(currentIndex);
-        });
+                    nextButton.addEventListener("click", () => {
+                        currentIndex =
+                            (currentIndex + 1) % slides.length;
+
+                        showImage(currentIndex);
+                    });
+
+                    dots.forEach((dot, index) => {
+                        dot.addEventListener("click", () => {
+                            currentIndex = index;
+                            showImage(currentIndex);
+                        });
+                    });
+                }
+
+                showImage(currentIndex);
+            });
+        }
     </script>
     <script>
         // Konfigurasi
@@ -151,6 +174,49 @@
             const achievement = item.fields;
             const achievementId = item.pk;
 
+            const imageHtml = achievement.images.length > 0
+                ? `
+                    <div class="achievement-gallery">
+                        ${achievement.images.map((image, index) => `
+                            <figure class="achievement-gallery__slide ${index === 0 ? 'is-active' : ''}">
+                                <img
+                                    src="${escapeHtml(image)}"
+                                    alt="Gambar ${escapeHtml(achievement.name)}"
+                                    class="achievement-gallery__image"
+                                >
+                            </figure>
+                        `).join('')}
+
+                        ${achievement.images.length > 1 ? `
+                            <div class="achievement-gallery__controls">
+                                <button
+                                    type="button"
+                                    class="achievement-gallery__prev"
+                                    aria-label="Foto sebelumnya"
+                                >‹</button>
+
+                                <button
+                                    type="button"
+                                    class="achievement-gallery__next"
+                                    aria-label="Foto berikutnya"
+                                >›</button>
+                            </div>
+
+                            <div class="achievement-gallery__dots">
+                                ${achievement.images.map((_, index) => `
+                                    <button
+                                        type="button"
+                                        class="achievement-gallery__dot ${index === 0 ? 'is-active' : ''}"
+                                        aria-label="Foto ${index + 1}"
+                                        aria-selected="${index === 0}"
+                                    ></button>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `
+                : '';
+
             const articleElement = document.createElement('article');
             articleElement.className = 'experience-card';
 
@@ -188,6 +254,8 @@
                 : "Jadilah yang pertama memberi star";
 
             const completeCardHtml = `
+                ${imageHtml}
+                
                 <h2>${escapeHtml(achievement.name)}</h2>
                 <p><strong>${escapeHtml(achievement.organizer)}</strong></p>
                 <p>${escapeHtml(achievement.award)}</p>
@@ -250,6 +318,8 @@
                             buildAchievementCardElement(item)
                         );
                     });
+
+                    initializeAchievementGalleries();
 
                     displayPageSection({ showGrid: true });
                 }

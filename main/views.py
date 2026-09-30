@@ -118,7 +118,7 @@ def create_achievement_ajax(request):
 
 def get_achievements_json(request):
     title_query = request.GET.get("title", "").strip()
-    achievements = Achievement.objects.prefetch_related("starred_by").all()
+    achievements = Achievement.objects.prefetch_related("starred_by","images").all()
 
     if title_query:
         achievements = achievements.filter(
@@ -129,6 +129,11 @@ def get_achievements_json(request):
 
     for achievement in achievements:
         starred_users = achievement.starred_by.all()
+
+        images = [
+            image.image_url
+            for image in achievement.images.all()
+        ]
 
         is_starred = (
             request.user in starred_users
@@ -150,6 +155,7 @@ def get_achievements_json(request):
                 "description": achievement.description,
                 "field": achievement.field,
                 "level": achievement.level,
+                "images": images,
                 "star_count": starred_users.count(),
                 "is_starred": is_starred,
                 "starred_by_names": starred_by_names,
