@@ -133,6 +133,7 @@
         // Konfigurasi
         const BASE_ACHIEVEMENTS_ENDPOINT = "{% url 'main:get_achievements_json' %}";
         const IS_SUPERUSER = "{{ user.is_superuser|yesno:'true,false' }}" === "true";
+        const IS_EDITOR = "{{ is_editor|yesno:'true,false' }}" === "true";
         let achievementsAbortController;
 
         // Elemen DOM
@@ -229,10 +230,12 @@
             const deleteUrl = "{% url 'main:delete_achievement' 0 %}"
                 .replace('0', achievementId);
             
-            const adminActionsHtml = IS_SUPERUSER
-                ? `
-                    <a href="${editUrl}" class="button">Edit</a>
+            const editButtonHtml = (IS_SUPERUSER || IS_EDITOR)
+                ? `<a href="${editUrl}" class="button">Edit</a>`
+                : '';
 
+            const deleteButtonHtml = IS_SUPERUSER
+                ? `
                     <form method="post"
                         action="${deleteUrl}"
                         style="display:inline;">
@@ -245,6 +248,8 @@
                     </form>
                 `
                 : '';
+
+            const adminActionsHtml = editButtonHtml + deleteButtonHtml;
 
             const isStarredClass = achievement.is_starred ? " is-starred" : "";
             const starText = achievement.is_starred ? "Unstar" : "Star";
