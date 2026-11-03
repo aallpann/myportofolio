@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -40,6 +44,14 @@ h3 {
   padding: 0 1.5rem;
 }
 
+.hide {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Header & footer
+   ========================================================================== */
+
 .site-header {
   border-bottom: 1px solid var(--line);
 }
@@ -69,8 +81,18 @@ h3 {
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
-  transition: color 0.2s ease;
 }
+
+.site-footer {
+  padding: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   Hero (halaman Profile)
+   ========================================================================== */
 
 .hero {
   padding: 4.5rem 0 5rem;
@@ -181,128 +203,9 @@ h3 {
   border: 3px solid var(--ink);
 }
 
-.site-footer {
-  padding: 1.5rem;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  border-top: 1px solid var(--line);
-}
-
-.experience {
-  padding: 64px 0;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.experience-card {
-  padding: 24px;
-  background-color: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-.experience-card:hover {
-  background-color: #eef2ff;
-  border-color: var(--accent);
-  transform: translateY(-4px);
-}
-
-.experience-card h3 {
-  margin-top: 8px;
-}
-
-.experience-meta {
-  color: var(--accent);
-  font-size: 14px;
-  margin-bottom: 12px;
-}
-
-.experience-description {
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-.experience h2 {
-  font-size: 36px;
-  margin-bottom: 24px;
-}
-
-@media (max-width: 600px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "identity"
-      "photo"
-      "details";
-  }
-
-  .hero-photo {
-    max-width: 220px;
-  }
-
-  .social-links {
-    justify-content: flex-start;
-  }
-
-  .experience {
-    padding: 64px 16px;
-  }
-}
-
-.experience-section {
-    padding: 4rem 0;
-    border-top: 1px solid var(--line);
-}
-
-.section-kicker {
-    color: var(--accent-dark);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.experience-section h1 {
-    margin: 0.4rem 0 1.5rem;
-    font-size: 2rem;
-}
-
-.experience-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-}
-
-.experience-card {
-    padding: 1.25rem;
-    background-color: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-}
-
-.experience-category {
-    color: var(--accent-dark);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.experience-card h2 {
-    margin: 0.5rem 0;
-    font-size: 1.25rem;
-}
-
-.experience-description,
-.empty-state {
-    color: var(--text-muted);
-}
-
-.experience-status {
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
+/* ==========================================================================
+   What I do (halaman Profile)
+   ========================================================================== */
 
 .what-i-do {
   padding: 64px 0;
@@ -352,558 +255,580 @@ h3 {
   line-height: 1.7;
 }
 
-@media (max-width: 600px) {
-  .what-i-do-grid {
-    grid-template-columns: 1fr;
-  }
+/* ==========================================================================
+   Section & cards (Experience, Achievements, form, login)
+   ========================================================================== */
+
+.experience-section {
+  padding: 4rem 0;
+  border-top: 1px solid var(--line);
 }
 
+.section-kicker {
+  color: var(--accent-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.experience-section h1 {
+  margin: 0.4rem 0 1.5rem;
+  font-size: 2rem;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.experience-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  background-color: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.experience-card:hover {
+  background-color: #eef2ff;
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.experience-category {
+  color: var(--accent-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.experience-card h2 {
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.experience-description,
+.empty-state {
+  color: var(--text-muted);
+}
+
+.experience-description {
+  line-height: 1.7;
+}
+
+.experience-status {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Status + tombol aksi selalu menempel di bawah card, jadi sejajar antar card.
+   Hapus blok ini kalau tidak mau tombol turun ke dasar card. */
+.experience-card > .experience-status {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.button {
+  display: inline-block;
+  height: fit-content;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 0.65rem 1rem;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.button-secondary {
+  background: var(--ink);
+}
+
+.button-danger {
+  background: #2a1996;
+}
+
+.button-star {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--ink);
+}
+
+.button-star.is-starred {
+  background: var(--accent);
+}
+
+.star-form {
+  display: inline;
+}
+
+.star-count {
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 0.8rem;
+}
+
+/* Baris tombol Edit / Hapus / Star di dalam card */
+.project-card-actions {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.project-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-actions .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* FIX tombol tidak lurus:
+   tombol "Hapus Experience" dibungkus <p class="experience-status"> yang punya
+   margin-top: 1rem, sehingga turun dari tombol Edit. Di dalam .project-actions
+   margin itu dibuang dan <p> dijadikan flex supaya tingginya = tinggi tombol. */
+.project-actions .experience-status {
+  display: flex;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
 .achievement-form {
-    width: 100%;
-    max-width: 100%;
-    margin-top: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 1.5rem;
 }
 
 .form-group {
-    margin-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 700;
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.7rem;
-    border: 1px solid var(--accent);
-    border-radius: var(--radius);
-    font: inherit;
-    transition:
-        border-color 0.2s ease,
-        outline-color 0.2s ease;
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  font: inherit;
+  transition: border-color 0.2s ease, outline-color 0.2s ease;
 }
 
 /* Dropdown select */
 .form-group select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    padding-right: 48px;
-    cursor: pointer;
-
-    background-color: white;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath d='M7 9l5 5 5-5' fill='none' stroke='%23667085' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    background-size: 18px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 48px;
+  cursor: pointer;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath d='M7 9l5 5 5-5' fill='none' stroke='%23667085' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 18px;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-    outline: 2px solid var(--accent);
-    border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
 }
 
 .form-error {
-    color: #b42318;
-    font-size: 0.85rem;
-    margin-top: 0.35rem;
+  color: #b42318;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
 }
 
-.button {
-    display: inline-block;
-    height: fit-content;
-    border: 0;
-    border-radius: var(--radius);
-    padding: 0.65rem 1rem;
-    background: var(--accent);
-    color: white;
-    cursor: pointer;
-    font: inherit;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.button-secondary {
-    background: var(--ink);
-}
-
-/* achievements */
+/* ==========================================================================
+   Achievements
+   ========================================================================== */
 
 .achievement-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.achievement-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.achievement-grid .experience-card {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    overflow: hidden;
-    padding: 1.25rem;
-}
-
-.achievement-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    border: 1px solid black;
-    border-radius: var(--radius);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .achievement-header h1 {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
-.achievement-add-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
+.achievement-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 }
 
-.achievement-add-button span {
-    font-size: 1.25rem;
-    line-height: 1;
+.achievement-grid .experience-card {
+  min-width: 0;
+  overflow: hidden;
 }
 
 .achievement-search {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .achievement-search__input {
-    width: 100%;
-    min-width: 0;
-    padding: 0.7rem;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: #fff;
-    color: var(--ink);
-    font: inherit;
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
 }
 
 .achievement-search__input:focus {
-    outline: 2px solid var(--accent);
-    border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
 }
 
-.achievement-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 1rem;
-}
-
-.achievement-actions .button {
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.achievement-card-actions {
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
-}
-
-.hide {
-    display: none !important;
-}
-
-.achievement-actions .experience-status {
-    margin-top: 0;
-}
-
-.achievement-delete-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    padding: 1rem;
-    border: 0;
-    background: transparent;
-    z-index: 10;
-    align-items: center;
-    justify-content: center;
-}
-
-.achievement-delete-modal:popover-open {
-    display: flex;
-}
-
-.achievement-delete-modal__backdrop {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    padding: 0;
-    background: rgba(28, 25, 23, 0.58);
-    cursor: default;
-}
-
-.achievement-delete-modal__content {
-    position: relative;
-    z-index: 1;
-    width: min(100%, 480px);
-    padding: 1.5rem;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
-}
-
-.achievement-delete-modal__content h2 {
-    margin: 0 0 0.75rem;
-    font-family:
-        "Space Grotesk",
-        -apple-system,
-        sans-serif;
-    font-size: 1.5rem;
-}
-
-.achievement-delete-modal__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    border: 0;
-    padding: 0;
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 1.8rem;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.achievement-delete-modal__actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-}
-
-.button-danger {
-    background: #2a1996;
-}
-
-@media (max-width: 600px) {
-    .achievement-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .achievement-add-button {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .achievement-search {
-        flex-direction: column;
-    }
-
-    .achievement-search .button {
-        width: 100%;
-    }
-
-    .achievement-delete-modal {
-        align-items: flex-end;
-        padding: 0;
-    }
-
-    .achievement-delete-modal__content {
-        width: 100%;
-        padding: 1.25rem;
-        border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .achievement-delete-modal__actions {
-        flex-direction: column-reverse;
-    }
-
-    .achievement-delete-modal__actions .button {
-        width: 100%;
-        text-align: center;
-    }
-}
-
+/* Gallery */
 .achievement-gallery {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: #f7f8fc;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f7f8fc;
 }
 
 .achievement-gallery__slide {
-    position: absolute;
-    inset: 0;
-    display: none;
-    margin: 0;
+  position: absolute;
+  inset: 0;
+  display: none;
+  margin: 0;
 }
 
 .achievement-gallery__slide.is-active {
-    display: block;
-}
-
-.achievement-gallery__backdrop {
-    display: none;
+  display: block;
 }
 
 .achievement-gallery__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .achievement-gallery__controls {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  pointer-events: none;
 }
 
 .achievement-gallery__controls > button,
 .achievement-gallery__dots {
-    pointer-events: auto;
+  pointer-events: auto;
 }
 
 .achievement-gallery__prev,
 .achievement-gallery__next {
-    width: 36px;
-    height: 36px;
-    border: 0;
-    border-radius: 50%;
-    background: rgba(23, 32, 51, 0.75);
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
-    line-height: 1;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(23, 32, 51, 0.75);
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
 }
 
 .achievement-gallery__prev:hover,
 .achievement-gallery__next:hover {
-    background: var(--accent);
+  background: var(--accent);
 }
 
 .achievement-gallery__dots {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    display: flex;
-    gap: 6px;
-    transform: translateX(-50%);
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  display: flex;
+  gap: 6px;
+  transform: translateX(-50%);
 }
 
 .achievement-gallery__dot {
-    width: 7px;
-    height: 7px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.6);
-    cursor: pointer;
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
 }
 
 .achievement-gallery__dot.is-active {
-    background: white;
-    transform: scale(1.25);
+  background: white;
+  transform: scale(1.25);
 }
 
-@media (max-width: 700px) {
-    .achievement-gallery {
-        height: 200px;
-    }
-}
+/* ==========================================================================
+   Modal (hapus & form tambah)
+   ========================================================================== */
 
-.star-form {
-    display: inline;
-}
-
-.button-star {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: var(--ink);
-}
-
-.button-star.is-starred {
-    background: var(--accent);
-}
-
-.star-count {
-    padding: 0.05rem 0.4rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.25);
-    font-size: 0.8rem;
-}
-
-/* toast */
-.toast-component {
-    position: fixed;
-    inset: auto 2rem 2rem auto;
-    margin: 0;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius);
-    box-shadow: 0 10px 25px rgba(28, 25, 23, 0.15);
-    display: none;
-    align-items: center;
-    gap: 1rem;
-    transition: all 0.3s ease;
-    background-color: var(--paper);
-    border: 1px solid var(--line);
-    color: inherit;
-}
-
-.toast-component:popover-open {
-    display: flex;
-}
-
-.toast-hidden {
-    opacity: 0;
-    transform: translateY(150%);
-    pointer-events: none;
-}
-
-.toast-show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.toast-title {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.15rem;
-    font-family: "Space Grotesk", -apple-system, sans-serif;
-}
-
-.toast-message {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-/* Modifikasi border kiri berdasarkan tipe notifikasi */
-.toast-success { border-left: 4px solid #4f6fdc; }
-.toast-error { border-left: 4px solid #b42318; }
-.toast-normal { border-left: 4px solid var(--accent); }
-
+.achievement-delete-modal,
 .project-form-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    padding: 1rem;
-    border: 0;
-    background: transparent;
-    z-index: 10;
-    align-items: center;
-    justify-content: center;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 1rem;
+  border: 0;
+  background: transparent;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
 }
 
+.achievement-delete-modal {
+  display: none;
+}
+
+.achievement-delete-modal:popover-open,
 .project-form-modal:popover-open {
-    display: flex;
+  display: flex;
 }
 
+.achievement-delete-modal__backdrop,
 .project-form-modal__backdrop {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    padding: 0;
-    background: rgba(28, 25, 23, 0.58);
-    cursor: default;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  background: rgba(28, 25, 23, 0.58);
+  cursor: default;
+}
+
+.achievement-delete-modal__content,
+.project-form-modal__content {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
+}
+
+.achievement-delete-modal__content {
+  width: min(100%, 480px);
 }
 
 .project-form-modal__content {
-    position: relative;
-    z-index: 1;
-    width: min(100%, 640px);
-    max-height: calc(100vh - 2rem);
-    overflow-y: auto;
-    padding: 1.5rem;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: 0 1rem 3rem rgba(28, 25, 23, 0.22);
+  width: min(100%, 640px);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.achievement-delete-modal__content h2 {
+  margin: 0 0 0.75rem;
+  font-family: "Space Grotesk", -apple-system, sans-serif;
+  font-size: 1.5rem;
 }
 
 .project-form-modal__content h2 {
-    margin: 0 2.5rem 1.25rem 0;
-    font-family: "Space Grotesk", -apple-system, sans-serif;
-    font-size: 1.5rem;
+  margin: 0 2.5rem 1.25rem 0;
+  font-family: "Space Grotesk", -apple-system, sans-serif;
+  font-size: 1.5rem;
 }
 
+.achievement-delete-modal__close,
 .project-form-modal__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    border: 0;
-    padding: 0;
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 1.8rem;
-    line-height: 1;
-    cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
+.achievement-delete-modal__actions,
 .project-form-modal__actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
 }
+
+/* ==========================================================================
+   Toast
+   ========================================================================== */
+
+.toast-component {
+  position: fixed;
+  inset: auto 2rem 2rem auto;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 25px rgba(28, 25, 23, 0.15);
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--paper);
+  border: 1px solid var(--line);
+  color: inherit;
+}
+
+.toast-component:popover-open {
+  display: flex;
+}
+
+.toast-hidden {
+  opacity: 0;
+  transform: translateY(150%);
+  pointer-events: none;
+}
+
+.toast-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+  font-family: "Space Grotesk", -apple-system, sans-serif;
+}
+
+.toast-message {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Border kiri berdasarkan tipe notifikasi */
+.toast-success { border-left: 4px solid var(--accent); }
+.toast-error { border-left: 4px solid #b42318; }
+.toast-normal { border-left: 4px solid var(--accent); }
+
+/* ==========================================================================
+   Responsive (mobile)
+   ========================================================================== */
 
 @media (max-width: 600px) {
-    .project-form-modal {
-        align-items: flex-end;
-        padding: 0;
-    }
+  /* Hero */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "identity"
+      "photo"
+      "details";
+  }
 
-    .project-form-modal__content {
-        width: 100%;
-        max-height: 90vh;
-        padding: 1.25rem;
-        border-radius: var(--radius) var(--radius) 0 0;
-    }
+  .hero-photo {
+    max-width: 220px;
+  }
 
-    .project-form-modal__actions {
-        flex-direction: column-reverse;
-    }
+  .social-links {
+    justify-content: flex-start;
+  }
 
-    .project-form-modal__actions .button {
-        width: 100%;
-        text-align: center;
-    }
+  /* What I do */
+  .what-i-do-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Achievements */
+  .achievement-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .achievement-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .achievement-search {
+    flex-direction: column;
+  }
+
+  .achievement-search .button {
+    width: 100%;
+  }
+
+  /* Modal */
+  .achievement-delete-modal,
+  .project-form-modal {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .achievement-delete-modal__content,
+  .project-form-modal__content {
+    width: 100%;
+    padding: 1.25rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  .project-form-modal__content {
+    max-height: 90vh;
+  }
+
+  .achievement-delete-modal__actions,
+  .project-form-modal__actions {
+    flex-direction: column-reverse;
+  }
+
+  .achievement-delete-modal__actions .button,
+  .project-form-modal__actions .button {
+    width: 100%;
+    text-align: center;
+  }
 }

@@ -57,7 +57,8 @@ class AchievementImage(models.Model):
         on_delete=models.CASCADE,
         related_name="images"
     )
-    image_url = models.URLField()
+    image_url = models.URLField(blank=True)
+    image = models.ImageField(upload_to="achievements/", blank=True, null=True)
 
     def __str__(self):
         return f"Image for {self.achievement.name}"

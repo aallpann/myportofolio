@@ -27,6 +27,7 @@
 
         <form id="achievement-form"
               method="post"
+              enctype="multipart/form-data"
               action="{% url 'main:create_achievement' %}"
               class="project-form">
 
@@ -45,6 +46,18 @@
                     {% endfor %}
                 </div>
             {% endfor %}
+
+            <div class="form-group">
+                <label for="achievement-images">Foto Achievement</label>
+                <input
+                    type="file"
+                    id="achievement-images"
+                    name="uploaded_images"
+                    accept="image/*"
+                    multiple
+                >
+                <small>Pilih satu atau beberapa foto dari perangkat lu.</small>
+            </div>
 
             <div class="project-form-modal__actions">
 
