@@ -600,7 +600,8 @@ a {
    Hapus blok ini kalau tidak mau tombol turun ke dasar card. */
 .experience-card > .experience-status {
   margin-top: auto;
-  padding-top: 1rem;
+  padding-top: 16px;
+  margin-bottom: 16px;
 }
 
 /* ==========================================================================
@@ -691,7 +692,7 @@ a {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 14px;
 }
 
 .project-actions .button {
