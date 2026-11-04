@@ -1,13 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#120d29" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- Cormorant Garamond = font judul (romantis, cocok untuk "serenade"); DM Sans = font isi -->
         <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet"
         />
         <link rel="stylesheet" href="/static/css/style.css" />
@@ -17,7 +19,7 @@
     <body>
         <header class="site-header">
             <div class="container">
-                <a href="{% url 'main:show_main' %}" class="brand">Alfan</a>
+                <a href="{% url 'main:show_main' %}" class="brand">Alfan<span class="brand-note" aria-hidden="true">&#9834;</span></a>
                 <nav>
                     <a href="{% url 'main:show_main' %}">Profile</a>
                     <a href="{% url 'main:show_experience' %}">Experience</a>
@@ -40,5 +42,8 @@
             </div>
         </footer>
         {% include 'components/toast.html' %}
+
+        {# Tempat halaman tertentu (misal Profile) menaruh JavaScript tambahannya #}
+        {% block scripts %}{% endblock scripts %}
     </body>
 </html>

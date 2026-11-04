@@ -14,6 +14,7 @@
             </p>
             <h1>Alfan Kurnia Karim</h1>
           </div>
+
           <div class="hero-photo">
             <div class="photo-block"></div>
             <img
@@ -22,6 +23,7 @@
               alt="Photo of Alfan Kurnia Karim"
             />
           </div>
+
           <div class="hero-details">
             <p class="bio">
               An Information Systems student currently studying platform-based
@@ -43,21 +45,107 @@
                 </div>
             </dl>
             <div class="social-links">
-              <a href="https://github.com/aallpann/" class="social-link"
-                >GitHub</a
-              >
+              <a href="https://github.com/aallpann/" class="social-link">GitHub</a>
               <a
                 href="https://www.linkedin.com/in/alfan-kurnia-karim-5ba9a22a1/"
                 class="social-link"
                 >LinkedIn</a
               >
-              <a href="mailto:alfankurniakarim07.com" class="social-link"
-                >Email</a
-              >
+              <a href="mailto:alfankurniakarim07.com" class="social-link">Email</a>
+            </div>
+          </div>
+
+          <!--
+            PARANADA (staff): 5 garis + 8 not (do re mi fa sol la si do), terinspirasi
+            konsep foto album "Heavy Serenade" NMIXX (member menjadi not di atas paranada).
+            Not-not ini bisa dimainkan sendiri (klik, atau tekan tombol 1-8 di keyboard).
+            - data-freq  : frekuensi nada (Hz) yang dibunyikan saat not dimainkan
+            - --i        : urutan not, dipakai CSS untuk jeda animasi
+            - --c        : warna tiap not
+          -->
+          <div class="hero-staff">
+            <svg
+              class="staff"
+              viewBox="0 0 720 150"
+              role="group"
+              aria-label="Paranada dengan delapan not (do re mi fa sol la si do) yang bisa dimainkan"
+            >
+              <!-- 5 garis paranada -->
+              <g class="staff-lines">
+                <line x1="0" y1="35" x2="720" y2="35" />
+                <line x1="0" y1="50" x2="720" y2="50" />
+                <line x1="0" y1="65" x2="720" y2="65" />
+                <line x1="0" y1="80" x2="720" y2="80" />
+                <line x1="0" y1="95" x2="720" y2="95" />
+              </g>
+              <!-- garis birama di awal & garis penutup (double bar) di akhir -->
+              <g class="staff-bars">
+                <line x1="2" y1="35" x2="2" y2="95" />
+                <line x1="704" y1="35" x2="704" y2="95" />
+                <line class="bar-thick" x1="714" y1="35" x2="714" y2="95" />
+              </g>
+
+              <g class="note" style="--i:0; --c:#b9a2ff" data-freq="261.63" role="button" tabindex="0" aria-label="Not do (C), klik untuk memainkan">
+                <circle class="note-hit" cx="90" cy="110" r="26" />
+                <line class="note-ledger" x1="73" y1="110" x2="107" y2="110" />
+                <ellipse class="note-head" cx="90" cy="110" rx="10" ry="7.5" />
+                <line class="note-stem" x1="99.2" y1="108" x2="99.2" y2="72" />
+                <text class="note-label" x="90" y="140">do</text>
+              </g>
+              <g class="note" style="--i:1; --c:#ff9fd0" data-freq="293.66" role="button" tabindex="0" aria-label="Not re (D), klik untuk memainkan">
+                <circle class="note-hit" cx="172" cy="102.5" r="26" />
+                <ellipse class="note-head" cx="172" cy="102.5" rx="10" ry="7.5" />
+                <line class="note-stem" x1="181.2" y1="100.5" x2="181.2" y2="64.5" />
+                <text class="note-label" x="172" y="140">re</text>
+              </g>
+              <g class="note" style="--i:2; --c:#ffb59a" data-freq="329.63" role="button" tabindex="0" aria-label="Not mi (E), klik untuk memainkan">
+                <circle class="note-hit" cx="254" cy="95" r="26" />
+                <ellipse class="note-head" cx="254" cy="95" rx="10" ry="7.5" />
+                <line class="note-stem" x1="263.2" y1="93" x2="263.2" y2="57" />
+                <text class="note-label" x="254" y="140">mi</text>
+              </g>
+              <g class="note" style="--i:3; --c:#ffe3a8" data-freq="349.23" role="button" tabindex="0" aria-label="Not fa (F), klik untuk memainkan">
+                <circle class="note-hit" cx="336" cy="87.5" r="26" />
+                <ellipse class="note-head" cx="336" cy="87.5" rx="10" ry="7.5" />
+                <line class="note-stem" x1="345.2" y1="85.5" x2="345.2" y2="49.5" />
+                <text class="note-label" x="336" y="140">fa</text>
+              </g>
+              <g class="note" style="--i:4; --c:#9fe8d0" data-freq="392.0" role="button" tabindex="0" aria-label="Not sol (G), klik untuk memainkan">
+                <circle class="note-hit" cx="418" cy="80" r="26" />
+                <ellipse class="note-head" cx="418" cy="80" rx="10" ry="7.5" />
+                <line class="note-stem" x1="427.2" y1="78" x2="427.2" y2="42" />
+                <text class="note-label" x="418" y="140">sol</text>
+              </g>
+              <g class="note" style="--i:5; --c:#9fc8ff" data-freq="440.0" role="button" tabindex="0" aria-label="Not la (A), klik untuk memainkan">
+                <circle class="note-hit" cx="500" cy="72.5" r="26" />
+                <ellipse class="note-head" cx="500" cy="72.5" rx="10" ry="7.5" />
+                <line class="note-stem" x1="509.2" y1="70.5" x2="509.2" y2="34.5" />
+                <text class="note-label" x="500" y="140">la</text>
+              </g>
+              <g class="note" style="--i:6; --c:#e3b5ff" data-freq="493.88" role="button" tabindex="0" aria-label="Not si (B), klik untuk memainkan">
+                <circle class="note-hit" cx="582" cy="65" r="26" />
+                <ellipse class="note-head" cx="582" cy="65" rx="10" ry="7.5" />
+                <line class="note-stem" x1="572.8" y1="67" x2="572.8" y2="103" />
+                <text class="note-label" x="582" y="140">si</text>
+              </g>
+              <g class="note" style="--i:7; --c:#b9a2ff" data-freq="523.25" role="button" tabindex="0" aria-label="Not do (C tinggi), klik untuk memainkan">
+                <circle class="note-hit" cx="664" cy="57.5" r="26" />
+                <ellipse class="note-head" cx="664" cy="57.5" rx="10" ry="7.5" />
+                <line class="note-stem" x1="654.8" y1="59.5" x2="654.8" y2="95.5" />
+                <text class="note-label" x="664" y="140">do</text>
+              </g>
+            </svg>
+
+            <div class="staff-caption">
+              <p>Mainkan sendiri: klik not atau tekan 1&ndash;8 di keyboard.</p>
+              <button type="button" id="play-melody" class="button button-secondary">
+                Mainkan Heavy Serenade
+              </button>
             </div>
           </div>
         </div>
       </section>
+
       <section class="what-i-do" id="what-i-do">
         <div class="container">
           <p class="section-kicker">What I Do</p>
@@ -65,7 +153,7 @@
 
           <div class="what-i-do-grid">
             <article class="what-i-do-card">
-              <span class="what-i-do-number">01</span>
+              <span class="what-i-do-number" aria-hidden="true">&#9833;</span>
               <h3>Business</h3>
               <p>
                 Interested in business strategy, case competitions,
@@ -74,17 +162,17 @@
             </article>
 
             <article class="what-i-do-card">
-              <span class="what-i-do-number">02</span>
+              <span class="what-i-do-number" aria-hidden="true">&#9834;</span>
               <h3>Music</h3>
               <p>
-                Interested in music, particularly pop and K-pop. Occasionally 
-                takes the opportunity to participate in vocal-related competitions 
+                Interested in music, particularly pop and K-pop. Occasionally
+                takes the opportunity to participate in vocal-related competitions
                 or activities, such as nasyid, acoustic performances, and a cappella.
               </p>
             </article>
 
             <article class="what-i-do-card">
-              <span class="what-i-do-number">03</span>
+              <span class="what-i-do-number" aria-hidden="true">&#9835;</span>
               <h3>Community</h3>
               <p>
                 Interested in contributing to communities through
@@ -96,3 +184,8 @@
       </section>
     </main>
 {% endblock content %}
+
+{% block scripts %}
+    <script src="/static/js/song.js"></script>
+    <script src="/static/js/serenade.js"></script>
+{% endblock scripts %}
