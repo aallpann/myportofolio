@@ -37,26 +37,56 @@ class MainTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "experience.html")
-        self.assertContains(response, self.experience.title)
-        self.assertContains(response, self.experience.description)
-        self.assertContains(response, "Part-Time")
-        self.assertContains(response, "Sedang berlangsung")
-        self.assertContains(response, f'href="{reverse("main:show_main")}"')
+        self.assertContains(response, "Memuat pengalaman...")
+        self.assertContains(
+            response,
+            f'href="{reverse("main:show_main")}"'
+        )
+
+        # Data Experience dimuat melalui API
+        api_response = self.client.get("/api/v1/experiences/")
+
+        self.assertEqual(api_response.status_code, 200)
+
+        data = api_response.json()
+
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]["title"], self.experience.title)
+        self.assertEqual(
+            data[0]["description"],
+            self.experience.description
+        )
+        self.assertEqual(data[0]["category"], "part-time")
+        self.assertTrue(data[0]["is_ongoing"])
 
     def test_empty_experience_page(self):
         Experience.objects.all().delete()
+
         response = self.client.get(reverse("main:show_experience"))
 
-        self.assertContains(response, "Belum ada pengalaman yang ditambahkan.")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Memuat pengalaman...")
+
+        api_response = self.client.get("/api/v1/experiences/")
+
+        self.assertEqual(api_response.status_code, 200)
+        self.assertEqual(api_response.json(), [])
 
     def test_completed_experience(self):
         self.experience.ended_at = timezone.now()
         self.experience.save()
-        response = self.client.get(reverse("main:show_experience"))
 
         self.assertFalse(self.experience.is_ongoing)
-        self.assertContains(response, "Selesai")
-        self.assertNotContains(response, "Sedang berlangsung")
+
+        api_response = self.client.get("/api/v1/experiences/")
+
+        self.assertEqual(api_response.status_code, 200)
+
+        data = api_response.json()
+
+        self.assertEqual(len(data), 1)
+        self.assertFalse(data[0]["is_ongoing"])
+        self.assertIsNotNone(data[0]["ended_at"])
 
     def test_achievement_model(self):
         achievement = Achievement.objects.create(

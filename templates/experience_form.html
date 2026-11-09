@@ -11,9 +11,11 @@
                 <h1>Add New Experience</h1>
 
                 <form method="post"
-                      action="{% url 'main:create_experience' %}"
-                      class="achievement-form">
-
+                    action="{% url 'main:create_experience' %}"
+                    class="achievement-form"
+                    id="experience-add-form"
+                    enctype="multipart/form-data">
+                    
                     {% csrf_token %}
 
                     {% for field in form %}
@@ -45,3 +47,55 @@
         </section>
     </main>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("experience-add-form");
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const submitButton = form.querySelector(
+            'button[type="submit"]'
+        );
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Menyimpan...";
+
+        try {
+            const response = await fetch("/api/v1/experiences/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": form.querySelector(
+                        '[name="csrfmiddlewaretoken"]'
+                    ).value
+                },
+                body: new FormData(form)
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (!response.ok) {
+                console.error(data);
+                alert(
+                    "Gagal menambahkan Experience. Periksa kembali input kamu."
+                );
+                return;
+            }
+
+            alert("Experience berhasil ditambahkan!");
+            window.location.href = "/experience/";
+
+        } catch (error) {
+            console.error(error);
+            alert("Terjadi kesalahan saat menambahkan Experience.");
+
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Tambah Experience";
+        }
+    });
+});
+</script>
+{% endblock scripts %}

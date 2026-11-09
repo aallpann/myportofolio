@@ -10,7 +10,12 @@
         <div class="container">
             <h1>Edit Experience</h1>
 
-            <form method="POST">
+            <form
+                method="POST"
+                id="experience-edit-form"
+                data-api-url="/api/v1/experiences/{{ experience.id }}/"
+                class="achievement-form"
+            >
                 {% csrf_token %}
 
                 {% for field in form %}
@@ -46,3 +51,49 @@
     </section>
 </main>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("experience-edit-form");
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        if (!data.ended_at) {
+            data.ended_at = null;
+        }
+
+        try {
+            const response = await fetch(form.dataset.apiUrl, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": form.querySelector(
+                        "[name=csrfmiddlewaretoken]"
+                    ).value
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error(errorData);
+                alert("Gagal memperbarui Experience. Periksa input kamu.");
+                return;
+            }
+
+            alert("Experience berhasil diperbarui!");
+            window.location.href = "/experience/";
+
+        } catch (error) {
+            console.error(error);
+            alert("Terjadi kesalahan saat memperbarui Experience.");
+        }
+    });
+});
+</script>
+{% endblock scripts %}

@@ -2,6 +2,8 @@ import datetime
 
 from django.shortcuts import redirect, render
 
+from django.utils.http import url_has_allowed_host_and_scheme
+
 from django.http import JsonResponse
 
 from main.forms import AchievementForm, AchievementImageFormSet, ExperienceForm
@@ -39,10 +41,12 @@ def show_main(request):
     return render(request, "index.html", context)
 
 
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+@ensure_csrf_cookie
 def show_experience(request):
     context = {
         "name": "Alfan",
-        "experience_list": Experience.objects.all(),
         "is_editor": is_editor(request.user),
     }
 
@@ -325,8 +329,21 @@ def login_user(request):
     if request.method == "POST" and form.is_valid():
         user = form.get_user()
         login(request, user)
-        response = redirect("main:show_main")
-        response.set_cookie('last_login', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+        next_url = request.POST.get("next")
+
+        if next_url and url_has_allowed_host_and_scheme(
+            next_url,
+            allowed_hosts={request.get_host()},
+        ):
+            response = redirect(next_url)
+        else:
+            response = redirect("main:show_main")
+
+        response.set_cookie(
+            'last_login',
+            datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        )
         return response
 
     context = {

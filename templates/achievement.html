@@ -275,7 +275,7 @@
                     ${starText}
                     <span class="star-count">${achievement.star_count}</span>
                 </button>`
-                : `<a href="{% url 'main:login' %}"
+                : `<a href="{% url 'main:login' %}?next={{ request.path|urlencode }}"
                         class="button button-star">
                     <span aria-hidden="true">★</span>
                     Star
